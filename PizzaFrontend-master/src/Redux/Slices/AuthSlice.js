@@ -5,7 +5,18 @@ import toast from "react-hot-toast";
 const initialState = {
     isLoggedIn: localStorage.getItem('isLoggedIn') === 'true' || false,
     role: localStorage.getItem('role') || '',
-    data: JSON.parse(localStorage.getItem('data')) || {},
+    data: (() => {
+        const storedData = localStorage.getItem('data');
+        if (storedData && storedData !== 'undefined' && storedData !== 'null') {
+            try {
+                return JSON.parse(storedData);
+            } catch (error) {
+                console.error('Error parsing stored user data:', error);
+                return {};
+            }
+        }
+        return {};
+    })(),
 };
 
 export const createAccount = createAsyncThunk('/auth/createAccount', async (data) => {
