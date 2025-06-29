@@ -8,33 +8,46 @@ const initialState = {
 
 export const getAllProducts = createAsyncThunk('/products/getAll', async () => {
     try {
-        const products = axiosInstance.get('/products');
-        toast.promise(products, {
-            loading: 'Loading all the products',
-            error: 'Something went cannot load products',
-            success: 'Products loaded successfully',
-        });
-        const apiResponse = await products;
-        return apiResponse
+        const apiResponse = await axiosInstance.get('/products');
+        return apiResponse;
     } catch(error) {
-        console.log(error);
-        toast.error('Something went wrong');
+        console.log("Error fetching products:", error);
+        throw error;
     }
 });
 
 export const getproductDetails = createAsyncThunk('/products/getDetails', async (id) => {
     try {
-        const product = axiosInstance.get(`/products/${id}`);
-        toast.promise(product, {
-            loading: 'Loading the product',
-            error: 'Something went cannot load product',
-            success: 'Product loaded successfully',
+        const apiResponse = await axiosInstance.get(`/products/${id}`);
+        return apiResponse;
+    } catch(error) {
+        console.log("Error fetching product details:", error);
+        throw error;
+    }
+});
+
+export const addProduct = createAsyncThunk('/products/addProduct', async (productData) => {
+    try {
+        const formData = new FormData();
+        formData.append('productName', productData.productName);
+        formData.append('description', productData.description);
+        formData.append('price', productData.price);
+        formData.append('quantity', productData.quantity);
+        formData.append('category', productData.category);
+        if (productData.productImage) {
+            formData.append('productImage', productData.productImage);
+        }
+
+        const apiResponse = await axiosInstance.post('/products', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         });
-        const apiResponse = await product;
+        
         return apiResponse;
     } catch(error) {
         console.log(error);
-        toast.error('Something went wrong');
+        throw error;
     }
 });
 
@@ -43,9 +56,35 @@ const productSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getAllProducts.fulfilled, (state, action) => {
-            console.log(action.payload);
-            state.productsData = action?.payload?.data?.data;
+        builder
+        .addCase(getAllProducts.pending, (state) => {
+            // Optional: Add loading state
+        })
+        .addCase(getAllProducts.fulfilled, (state, action) => {
+            const products = action?.payload?.data?.data;
+            if (Array.isArray(products)) {
+                state.productsData = products;
+                toast.success('Products loaded successfully');
+            } else {
+                state.productsData = [];
+                toast.error('Invalid products data format');
+            }
+        })
+        .addCase(getAllProducts.rejected, (state, action) => {
+            state.productsData = [];
+            toast.error('Failed to load products');
+        })
+        .addCase(getproductDetails.fulfilled, (state, action) => {
+            toast.success('Product details loaded');
+        })
+        .addCase(getproductDetails.rejected, (state, action) => {
+            toast.error('Failed to load product details');
+        })
+        .addCase(addProduct.fulfilled, (state, action) => {
+            toast.success('Product added successfully!');
+        })
+        .addCase(addProduct.rejected, (state, action) => {
+            toast.error('Failed to add product');
         });
     }
 });

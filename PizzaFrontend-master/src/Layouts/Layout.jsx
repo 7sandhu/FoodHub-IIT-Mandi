@@ -52,17 +52,38 @@ function Layout({ children }) {
                 <div className='hidden md:block'>
                     <ul className='flex gap-4'>
 
-                        <li className='hover:text-[#FF9110]'>
+                        <li className='hover:text-[#FF9110] cursor-pointer'
+                            onClick={() => {
+                                const menuSection = document.getElementById('menu-section');
+                                if (menuSection) {
+                                    menuSection.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
+                        >
                             { ' ' }
                             <p>Menu {' '}</p>
                         </li>
 
-                        <li className='hover:text-[#FF9110]'>
+                        <li className='hover:text-[#FF9110] cursor-pointer'
+                            onClick={() => {
+                                const servicesSection = document.getElementById('services-section');
+                                if (servicesSection) {
+                                    servicesSection.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
+                        >
                             { ' ' }
                             <p>Services {' '}</p>
                         </li>
 
-                        <li className='hover:text-[#FF9110]'>
+                        <li className='hover:text-[#FF9110] cursor-pointer'
+                            onClick={() => {
+                                const aboutSection = document.getElementById('about-section');
+                                if (aboutSection) {
+                                    aboutSection.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
+                        >
                             { ' ' }
                             <p>About {' '}</p>
                         </li>

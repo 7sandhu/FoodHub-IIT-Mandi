@@ -8,17 +8,13 @@ const initialState = {
 
 export const placeOrder = createAsyncThunk('/order/placeOrder', async () => {
     try {
-        const response = axiosInstance.post(`/orders`);
-        toast.promise(response, {
-            loading: 'Creating order',
-            error: 'Something went wrong cannot create order',
-            success: 'Order created successfully',
-        });
-        const apiResponse = await response;
+        const apiResponse = await axiosInstance.post(`/orders`);
+        toast.success('Order created successfully');
         return apiResponse;
     } catch(error) {
         console.log(error);
-        toast.error('Something went wrong');
+        toast.error('Failed to create order');
+        throw error;
     }
 });
 
@@ -28,8 +24,13 @@ const OrderSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(placeOrder.fulfilled, (state, action) => {
+        builder
+        .addCase(placeOrder.fulfilled, (state, action) => {
             state.ordersData = action?.payload?.data;
+        })
+        .addCase(placeOrder.rejected, (state, action) => {
+            console.log("Failed to place order:", action.error);
+            state.ordersData = null;
         });
     }
 });

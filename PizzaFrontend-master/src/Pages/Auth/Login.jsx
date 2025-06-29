@@ -36,10 +36,19 @@ function Login() {
             return;
         }
 
-        const apiReponse = await dispatch(login(loginData));
-        console.log("Api response", apiReponse);
-        if(apiReponse.payload.data.success) {
-            navigate('/');
+        try {
+            const apiResponse = await dispatch(login(loginData));
+            console.log("Api response", apiResponse);
+            
+            // Check if the login was successful
+            if(apiResponse.payload?.data?.success) {
+                navigate('/');
+            } else {
+                toast.error("Login failed. Please check your credentials.");
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            toast.error("Login failed. Please try again.");
         }
     }
 

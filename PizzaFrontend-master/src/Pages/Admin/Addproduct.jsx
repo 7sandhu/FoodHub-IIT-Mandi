@@ -1,6 +1,57 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../Layouts/Layout";
 import Food from '../../assets/Images/food.svg';
+import { addProduct } from "../../Redux/Slices/ProductSlice";
+
 function AddProduct() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
+    const [productData, setProductData] = useState({
+        productName: '',
+        description: '',
+        price: '',
+        quantity: '',
+        category: 'veg',
+        productImage: null
+    });
+
+    function handleUserInput(e) {
+        const { name, value, files } = e.target;
+        setProductData({
+            ...productData,
+            [name]: files ? files[0] : value
+        });
+    }
+
+    async function onFormSubmit(e) {
+        e.preventDefault();
+        
+        if (!productData.productName || !productData.price) {
+            toast.error('Product name and price are required');
+            return;
+        }
+
+        try {
+            const response = await dispatch(addProduct(productData));
+            if (response?.payload?.data?.success) {
+                setProductData({
+                    productName: '',
+                    description: '',
+                    price: '',
+                    quantity: '',
+                    category: 'veg',
+                    productImage: null
+                });
+                navigate('/'); // or wherever you want to redirect
+            }
+        } catch (error) {
+            console.error('Error adding product:', error);
+        }
+    }
+
     return (
         <Layout>
            <section className="py-12">

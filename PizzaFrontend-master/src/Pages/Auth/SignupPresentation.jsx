@@ -164,6 +164,19 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                         </div>
 
                         <div className="relative mb-4">
+                            <label htmlFor="lastName" className="text-sm leading-7 text-gray-600">Last Name</label>
+                            <input 
+                                type="text" 
+                                id="lastName" 
+                                name="lastName" 
+                                required 
+                                onChange={handleUserInput}
+                                minLength={5}
+                                placeholder="Doe"
+                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
+                        </div>
+
+                        <div className="relative mb-4">
                             <label htmlFor="email" className="text-sm leading-7 text-gray-600">Email <span className="text-red-500">*</span></label>
                             <input 
                                 type="email" 

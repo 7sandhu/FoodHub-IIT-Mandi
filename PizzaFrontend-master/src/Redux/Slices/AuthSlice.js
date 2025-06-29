@@ -22,54 +22,40 @@ const initialState = {
 export const createAccount = createAsyncThunk('/auth/createAccount', async (data) => {
     console.log("incoming data to the thunk", data);
     try {
-        const response = axiosInstance.post('/users', data);    
-        toast.promise(response, {
-            success: (resolvedPromise) => {
-                return resolvedPromise?.data?.message;
-            },
-            loading: 'Hold back tight, we are registering your id...',
-            error: 'Ohh No!, Something went wrong. Please try again.',
-        });
-        const apiResponse = await response;
+        const apiResponse = await axiosInstance.post('/users', data);
+        toast.success(apiResponse?.data?.message || 'Account created successfully');
+        console.log("API Response:", apiResponse);
         return apiResponse;
     } catch(error) {
-        console.log(error);
+        console.log("Error in createAccount:", error);
+        toast.error('Registration failed. Please try again.');
+        throw error;
     }
 });
 
 export const login = createAsyncThunk('/auth/login', async (data) => {
     console.log("incoming data to the thunk", data);
     try {
-        const response = axiosInstance.post('/auth/login', data);    
-        toast.promise(response, {
-            success: (resolvedPromise) => {
-                return resolvedPromise?.data?.message;
-            },
-            loading: 'Hold back tight, we are registering your id...',
-            error: 'Ohh No!, Something went wrong. Please try again.',
-        });
-        const apiResponse = await response;
+        const apiResponse = await axiosInstance.post('/auth/login', data);
+        toast.success(apiResponse?.data?.message || 'Logged in successfully');
         return apiResponse;
     } catch(error) {
-        console.log(error);
+        console.log("Login error:", error);
+        toast.error('Login failed. Please try again.');
+        throw error;
     }
 });
 
 export const logout = createAsyncThunk('/auth/logout', async () => {
     console.log("incoming data to the thunk");
     try {
-        const response = axiosInstance.post('/auth/logout');    
-        toast.promise(response, {
-            success: (resolvedPromise) => {
-                return resolvedPromise?.data?.message;
-            },
-            loading: 'Logging out...',
-            error: 'Ohh No!, Something went wrong. Please try again.',
-        });
-        const apiResponse = await response;
+        const apiResponse = await axiosInstance.post('/auth/logout');
+        toast.success(apiResponse?.data?.message || 'Logged out successfully');
         return apiResponse;
     } catch(error) {
         console.log(error);
+        toast.error('Logout failed. Please try again.');
+        throw error;
     }
 });
 
@@ -88,6 +74,13 @@ const AuthSlice = createSlice({
             localStorage.setItem('isLoggedIn', true);
             localStorage.setItem('role', action?.payload?.data?.data?.userRole);
             localStorage.setItem('data', JSON.stringify(action?.payload?.data?.data?.userData));
+        })
+        .addCase(login.rejected, (state, action) => {
+            // reducer which will execute when the login thunk is rejected
+            console.log("Login rejected:", action.error);
+            state.isLoggedIn = false;
+            state.role = '';
+            state.data = {};
         })
         .addCase(logout.fulfilled, (state) => {
             // reducer which will execute when the logout thunk is fulfilled

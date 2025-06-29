@@ -13,27 +13,40 @@ function ProductDetails() {
     // 
 
     async function fetchProductDetails() {
-        const details = await dispatch(getproductDetails(productId));
-        console.log(details);
-        setProductDetails(details?.payload?.data?.data);
-        
+        try {
+            const details = await dispatch(getproductDetails(productId));
+            if (details?.payload?.data?.data) {
+                setProductDetails(details.payload.data.data);
+            } else {
+                setProductDetails({});
+            }
+        } catch (error) {
+            console.error("Error fetching product details:", error);
+            setProductDetails({});
+        }
     }
 
     async function handleCart() {
-        // Add product to cart
-        const response = await dispatch(addProductToCart(productId));
-        if(response?.payload?.data?.success) {
-            setIsInCart(true);
-            dispatch(getCartDetails()); // Fetch cart details and update state
+        try {
+            const response = await dispatch(addProductToCart(productId));
+            if(response?.payload?.data?.success) {
+                setIsInCart(true);
+                dispatch(getCartDetails());
+            }
+        } catch (error) {
+            console.error("Error adding to cart:", error);
         }
     }
 
     async function handleRemove() {
-        // Remove product from cart
-        const response = await dispatch(removeProductFromCart(productId));
-        if(response?.payload?.data?.success) {
-            setIsInCart(false);
-            dispatch(getCartDetails()); // Fetch cart details and update state
+        try {
+            const response = await dispatch(removeProductFromCart(productId));
+            if(response?.payload?.data?.success) {
+                setIsInCart(false);
+                dispatch(getCartDetails());
+            }
+        } catch (error) {
+            console.error("Error removing from cart:", error);
         }
     }
 
