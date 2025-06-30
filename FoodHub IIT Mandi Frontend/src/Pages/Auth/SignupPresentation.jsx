@@ -147,11 +147,14 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                     </svg>
                  </div>
 
-                    <form className="flex flex-col w-full p-8 mt-10 bg-gray-100 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
-                        <h2 className="mb-5 text-lg font-medium text-gray-900 title-font">Sign up</h2>
+                    <form className="flex flex-col w-full p-8 mt-10 bg-white shadow-xl rounded-xl lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0 border border-gray-200">
+                        <div className="text-center mb-6">
+                            <h2 className="text-2xl font-bold text-gray-900 mb-2">Join FoodHub IIT Mandi</h2>
+                            <p className="text-gray-600">Create your account to order delicious food from campus restaurants</p>
+                        </div>
 
                         <div className="relative mb-4">
-                            <label htmlFor="firstName" className="text-sm leading-7 text-gray-600">First Name</label>
+                            <label htmlFor="firstName" className="text-sm font-medium leading-7 text-gray-700">First Name <span className="text-red-500">*</span></label>
                             <input 
                                 type="text" 
                                 id="firstName" 
@@ -160,11 +163,11 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                                 onChange={handleUserInput}
                                 minLength={5}
                                 placeholder="John"
-                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
+                                className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 
                         <div className="relative mb-4">
-                            <label htmlFor="lastName" className="text-sm leading-7 text-gray-600">Last Name</label>
+                            <label htmlFor="lastName" className="text-sm font-medium leading-7 text-gray-700">Last Name <span className="text-red-500">*</span></label>
                             <input 
                                 type="text" 
                                 id="lastName" 
@@ -173,23 +176,23 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                                 onChange={handleUserInput}
                                 minLength={5}
                                 placeholder="Doe"
-                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
+                                className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 
                         <div className="relative mb-4">
-                            <label htmlFor="email" className="text-sm leading-7 text-gray-600">Email <span className="text-red-500">*</span></label>
+                            <label htmlFor="email" className="text-sm font-medium leading-7 text-gray-700">Email <span className="text-red-500">*</span></label>
                             <input 
                                 type="email" 
                                 id="email" 
                                 name="email" 
                                 required 
                                 onChange={handleUserInput}
-                                placeholder="John@example.com"
-                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
+                                placeholder="john@example.com"
+                                className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 
                         <div className="relative mb-4">
-                            <label htmlFor="mobileNumber" className="text-sm leading-7 text-gray-600">Mobile Number <span className="text-red-500">*</span></label>
+                            <label htmlFor="mobileNumber" className="text-sm font-medium leading-7 text-gray-700">Mobile Number <span className="text-red-500">*</span></label>
                             <input 
                                 type="tel" 
                                 id="mobileNumber" 
@@ -198,11 +201,11 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                                 onChange={handleUserInput}
                                 maxLength={12}
                                 placeholder="Enter 10 digit mobile number"
-                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
+                                className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 
-                        <div className="relative mb-4">
-                            <label htmlFor="password" className="text-sm leading-7 text-gray-600">Password  <span className="text-red-500">*</span></label>
+                        <div className="relative mb-6">
+                            <label htmlFor="password" className="text-sm font-medium leading-7 text-gray-700">Password <span className="text-red-500">*</span></label>
                             <input 
                                 type="password" 
                                 id="password" 
@@ -210,17 +213,17 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                                 required 
                                 onChange={handleUserInput}
                                 placeholder="Enter your password"
-                                className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200" />
+                                className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 
                         <button 
                             onClick={handleFormSubmit}
-                            className="w-full px-8 py-2 text-lg text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600">
+                            className="w-full px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-orange-500 to-amber-500 border-0 rounded-lg shadow-md transition-all duration-200 hover:from-orange-600 hover:to-amber-600 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-200">
                             Create Account
                         </button>
 
-                        <p className="mt-3 text-xs text-gray-500">Already have an account? 
-                        <Link to="/auth/login" className="text-yellow-500">Login</Link>
+                        <p className="mt-4 text-center text-sm text-gray-600">Already have an account? 
+                        <Link to="/auth/login" className="font-medium text-orange-500 hover:text-orange-600 ml-1">Sign in here</Link>
                         </p>
                     </form>
                 </div>

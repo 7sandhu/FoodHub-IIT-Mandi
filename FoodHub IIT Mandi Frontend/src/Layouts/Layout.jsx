@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../Components/Footer';
 import Pizzalogo from '../assets/Images/pizza1.png';
 import CartIcon from '../assets/Images/cart.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { logout } from '../Redux/Slices/AuthSlice';
 import { useEffect } from 'react';
 import { getCartDetails } from '../Redux/Slices/CartSlice';
@@ -14,6 +14,27 @@ function Layout({ children }) {
     const { cartsData } = useSelector((state) => state.cart);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // Function to handle navigation to home sections
+    const navigateToHomeSection = (sectionId) => {
+        if (location.pathname === '/') {
+            // Already on home page, just scroll
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            // Navigate to home first, then scroll after a brief delay
+            navigate('/');
+            setTimeout(() => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
+        }
+    };
 
     async function handleLogout(e) {
         e.preventDefault();
@@ -45,44 +66,29 @@ function Layout({ children }) {
                 <div className="flex items-center justify-center"
                     onClick={() => navigate('/')}
                 >
-                    <p>Pizza App</p>
-                    <img src={Pizzalogo} alt="Pizza logo" />
+                    <p>FoodHub IIT Mandi</p>
+                    <img src={Pizzalogo} alt="FoodHub logo" />
                 </div>
 
                 <div className='hidden md:block'>
                     <ul className='flex gap-4'>
 
                         <li className='hover:text-[#FF9110] cursor-pointer'
-                            onClick={() => {
-                                const menuSection = document.getElementById('menu-section');
-                                if (menuSection) {
-                                    menuSection.scrollIntoView({ behavior: 'smooth' });
-                                }
-                            }}
+                            onClick={() => navigateToHomeSection('menu-section')}
                         >
                             { ' ' }
                             <p>Menu {' '}</p>
                         </li>
 
                         <li className='hover:text-[#FF9110] cursor-pointer'
-                            onClick={() => {
-                                const servicesSection = document.getElementById('services-section');
-                                if (servicesSection) {
-                                    servicesSection.scrollIntoView({ behavior: 'smooth' });
-                                }
-                            }}
+                            onClick={() => navigateToHomeSection('services-section')}
                         >
                             { ' ' }
                             <p>Services {' '}</p>
                         </li>
 
                         <li className='hover:text-[#FF9110] cursor-pointer'
-                            onClick={() => {
-                                const aboutSection = document.getElementById('about-section');
-                                if (aboutSection) {
-                                    aboutSection.scrollIntoView({ behavior: 'smooth' });
-                                }
-                            }}
+                            onClick={() => navigateToHomeSection('about-section')}
                         >
                             { ' ' }
                             <p>About {' '}</p>

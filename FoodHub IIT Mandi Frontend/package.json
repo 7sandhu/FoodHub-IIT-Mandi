@@ -1,7 +1,9 @@
 {
-  "name": "pizzafrontend",
+  "name": "foodhub-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Frontend for FoodHub IIT Mandi food ordering application",
+  "author": "Kartavya Sandhu <kartavya.sandhu@iitmandi.ac.in>",
   "type": "module",
   "scripts": {
     "dev": "vite",

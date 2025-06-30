@@ -1,1 +1,0 @@
-- [Web otp conference video](https://www.youtube.com/watch?v=ASs3_FUx2GE&list=PL03Lrmd9CiGccT0ERZ9YywROnQryo6gLG&index=19)

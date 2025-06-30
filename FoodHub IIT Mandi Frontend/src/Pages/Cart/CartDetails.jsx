@@ -33,20 +33,23 @@ function CartDetails() {
 
     return (
         <Layout>
-        <section className="py-8 antialiased md:py-16 ">
+        <section className="py-8 antialiased md:py-16 bg-gray-50 min-h-screen">
         <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
-          <h2 className="text-xl font-bold text-gray-900 sm:text-2xl">
-            Card details
-          </h2>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+              Your Cart
+            </h2>
+            <p className="text-gray-600 mt-2">Review your selected items from FoodHub IIT Mandi</p>
+          </div>
           {cartDetails?.items?.length > 0 ? (
             <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8 ">
               <div className="flex-none w-full mx-auto lg:max-w-2xl xl:max-w-4xl">
                 <div className="space-y-6">
                   {cartDetails?.items.map((item) => (
-                    <div key={item._id} className="p-4 text-gray-900 rounded-lg shadow-sm bg-gradient-to-r from-amber-50 to-orange-300 md:p-6 border">
+                    <div key={item._id} className="p-6 text-gray-900 rounded-xl shadow-lg bg-white border border-gray-100 hover:shadow-xl transition-shadow duration-200">
                       <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                         <img
-                          className="hidden w-20 h-20 dark:block rounded-md"
+                          className="hidden w-24 h-24 md:block rounded-lg object-cover shadow-md"
                           src={item?.product?.productImage}
                           alt={item?.product?.productName}
                         />
@@ -63,10 +66,10 @@ function CartDetails() {
                               <button
                                 type="button"
                                 onClick={() => handleRemove(item?.product?._id)}
-                                className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
+                                className="inline-flex items-center px-3 py-2 text-sm font-medium text-red-600 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 hover:text-red-800 transition-colors duration-200"
                               >
                                 <svg
-                                  className="me-1.5 h-5 w-5"
+                                  className="me-1.5 h-4 w-4"
                                   aria-hidden="true"
                                   xmlns="http://www.w3.org/2000/svg"
                                   width="24"
@@ -94,9 +97,9 @@ function CartDetails() {
               </div>
 
               <div className="flex-1 max-w-4xl mx-auto mt-6 space-y-6 lg:mt-0 lg:w-full">
-                <div className="p-4 space-y-4 text-gray-800 border rounded-lg shadow-sm bg-gradient-to-r from-amber-50 to-orange-300 sm:p-6">
-                  <p className="text-xl font-semibold text-gray-900 ">
-                    Order summary
+                <div className="p-6 space-y-4 text-gray-800 border border-gray-200 rounded-xl shadow-lg bg-white">
+                  <p className="text-xl font-bold text-gray-900">
+                    Order Summary
                   </p>
 
                   <div className="space-y-4">
@@ -132,7 +135,7 @@ function CartDetails() {
                   {cartDetails?.items.length > 0 && (
                     <Link
                       to={'/order'}
-                      className="flex justify-center text-white bg-yellow-400 border border-yellow-500 rounded-md hover:bg-yellow-700"
+                      className="flex justify-center px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-orange-500 to-amber-500 border border-orange-500 rounded-lg shadow-md transition-all duration-200 hover:from-orange-600 hover:to-amber-600 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-orange-200"
                     >
                       Proceed to Checkout
                     </Link>
@@ -145,7 +148,7 @@ function CartDetails() {
                     </span>
                     <Link
                       to={'/'}
-                      className="inline-flex items-center gap-2 text-sm font-medium underline text-primary-700 hover:no-underline dark:text-primary-500"
+                      className="inline-flex items-center gap-2 text-sm font-medium text-orange-600 hover:text-orange-800 underline hover:no-underline transition-colors duration-200"
                     >
                       Continue Shopping
                       <svg
@@ -169,7 +172,20 @@ function CartDetails() {
               </div>
             </div>
           ) : (
-            'Cart is empty'
+            <div className="text-center py-16">
+              <div className="max-w-md mx-auto">
+                <div className="w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                  <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"></path>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Your cart is empty</h3>
+                <p className="text-gray-600 mb-6">Start adding delicious items from our campus restaurants!</p>
+                <Link to="/" className="inline-flex items-center px-6 py-3 text-white bg-gradient-to-r from-orange-500 to-amber-500 rounded-lg hover:from-orange-600 hover:to-amber-600 transition-all duration-200">
+                  Browse Menu
+                </Link>
+              </div>
+            </div>
           )}
         </div>
         </section>

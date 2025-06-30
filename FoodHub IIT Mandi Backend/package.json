@@ -1,12 +1,12 @@
 {
-  "name": "expressstarter",
+  "name": "foodhub-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend API for FoodHub IIT Mandi food ordering application",
   "main": "index.js",
   "scripts": {
     "start": "npx nodemon src/index.js"
   },
-  "author": "",
+  "author": "Kartavya Sandhu <kartavya.sandhu@iitmandi.ac.in>",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
