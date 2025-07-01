@@ -11,9 +11,7 @@ function CartDetails() {
     const dispatch = useDispatch();
 
     async function fetchCartDetails() {
-        console.log("fetching cart details")
         const response = await dispatch(getCartDetails());
-        console.log(response);
         setCartDetails(response?.payload?.data?.data);
     }
 
@@ -21,12 +19,10 @@ function CartDetails() {
         // Remove product from cart
         const response = await dispatch(removeProductFromCart(productId));
         if(response?.payload?.data?.success) {
-            console.log("removed successfully")
             dispatch(getCartDetails()); // Fetch cart details and update state
         }
     }
     useEffect(() => {
-        console.log("re-rendering")
         fetchCartDetails();
     }, [cartsData?.items?.length]);
 

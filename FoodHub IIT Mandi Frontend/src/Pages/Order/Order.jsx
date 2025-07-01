@@ -29,12 +29,7 @@ function Order() {
         if(details.paymentMethod === '' || details.address === '') {
             toast.error("Please fill all the fields");
             return;
-        }
-
-        const response = await dispatch(placeOrder());
-
-        console.log("order response", response);
-
+        }        const response = await dispatch(placeOrder());
         if(response?.payload?.data?.success) {
             toast.success('Order placed successfully');
             navigate('/order/success');

@@ -22,7 +22,6 @@ function Login() {
 
      async function handleFormSubmit(e) {
         e.preventDefault(); // prevent the form from reloading the page
-        console.log(loginData);
 
         // Add validations for the form input
         if(!loginData.email || !loginData.password ) {
@@ -38,7 +37,6 @@ function Login() {
 
         try {
             const apiResponse = await dispatch(login(loginData));
-            console.log("Api response", apiResponse);
             
             // Check if the login was successful
             if(apiResponse.payload?.data?.success) {

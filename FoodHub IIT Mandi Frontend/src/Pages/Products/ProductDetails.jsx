@@ -21,7 +21,6 @@ function ProductDetails() {
                 setProductDetails({});
             }
         } catch (error) {
-            console.error("Error fetching product details:", error);
             setProductDetails({});
         }
     }

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../Components/Footer';
-import Pizzalogo from '../assets/Images/pizza1.png';
+import FoodIcon from '../assets/Images/food.svg';
 import CartIcon from '../assets/Images/cart.svg';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { logout } from '../Redux/Slices/AuthSlice';
@@ -44,50 +44,48 @@ function Layout({ children }) {
 
     async function fetchCartDetails() {
         const res = await dispatch(getCartDetails());
-        console.log("cart details", res)
-        if(res?.payload?.isUnauthorized) {
-            console.log("unauthorized");
-            dispatch(logout());
-        }
+        // Handle unauthorized access gracefully - allow browsing without forced logout
+        // if(res?.payload?.isUnauthorized) {
+        //     dispatch(logout());
+        // }
     }
 
     useEffect(() => {
-        console.log(typeof(isLoggedIn))
         if(isLoggedIn) {
             fetchCartDetails();
         }
-    }, []);
+    }, [isLoggedIn]);
 
     return (
         <div>
 
-            <nav className="flex items-center justify-around h-16 text-[#6B7280] font-mono border-none shadow-md">
+            <nav className="flex items-center justify-around h-16 bg-gradient-to-r from-orange-600 to-amber-600 text-white font-mono border-none shadow-lg">
 
-                <div className="flex items-center justify-center"
+                <div className="flex items-center justify-center cursor-pointer"
                     onClick={() => navigate('/')}
                 >
-                    <p>FoodHub IIT Mandi</p>
-                    <img src={Pizzalogo} alt="FoodHub logo" />
+                    <p className="mr-3 font-bold text-lg">FoodHub IIT Mandi</p>
+                    <img src={FoodIcon} alt="FoodHub logo" className="w-10 h-10 filter brightness-0 invert" />
                 </div>
 
                 <div className='hidden md:block'>
                     <ul className='flex gap-4'>
 
-                        <li className='hover:text-[#FF9110] cursor-pointer'
+                        <li className='hover:text-yellow-200 cursor-pointer transition-colors duration-300'
                             onClick={() => navigateToHomeSection('menu-section')}
                         >
                             { ' ' }
                             <p>Menu {' '}</p>
                         </li>
 
-                        <li className='hover:text-[#FF9110] cursor-pointer'
+                        <li className='hover:text-yellow-200 cursor-pointer transition-colors duration-300'
                             onClick={() => navigateToHomeSection('services-section')}
                         >
                             { ' ' }
                             <p>Services {' '}</p>
                         </li>
 
-                        <li className='hover:text-[#FF9110] cursor-pointer'
+                        <li className='hover:text-yellow-200 cursor-pointer transition-colors duration-300'
                             onClick={() => navigateToHomeSection('about-section')}
                         >
                             { ' ' }
@@ -99,7 +97,7 @@ function Layout({ children }) {
 
                 <div>
                     <ul className='flex gap-4'>
-                        <li className='hover:text-[#FF9110]'>
+                        <li className='hover:text-yellow-200 transition-colors duration-300'>
                             {isLoggedIn ? (
                                 <Link onClick={handleLogout}>Logout</Link>
                             ) : (
@@ -109,10 +107,10 @@ function Layout({ children }) {
 
                         {isLoggedIn && (
                             <Link to={'/cart'}>
-                                <li>
-                                    <img src={CartIcon} className='w-8 h-8 inline' />
+                                <li className='flex items-center hover:text-yellow-200 transition-colors duration-300'>
+                                    <img src={CartIcon} className='w-8 h-8 inline filter brightness-0 invert' />
                                     {' '}
-                                    <p className='text-black inline'>{cartsData?.items?.length}</p>
+                                    <p className='inline ml-1 bg-yellow-500 text-orange-800 px-2 py-1 rounded-full text-sm font-bold'>{cartsData?.items?.length}</p>
                                 </li>
                             </Link>
                             

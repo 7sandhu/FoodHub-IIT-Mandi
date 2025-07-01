@@ -28,7 +28,6 @@ function Signup() {
 
     async function handleFormSubmit(e) {
         e.preventDefault(); // prevent the form from reloading the page
-        console.log(signUpState);
 
         // Add validations for the form input
         if(!signUpState.email || !signUpState.mobileNumber || !signUpState.password || !signUpState.firstName || !signUpState.lastName) {
@@ -59,7 +58,6 @@ function Signup() {
         }
 
         const apiReponse = await dispatch(createAccount(signUpState));
-        console.log("Api response", apiReponse);
         if(apiReponse.payload.data.success) {
             navigate('/auth/login');
         }
