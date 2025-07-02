@@ -2,9 +2,10 @@
   "name": "foodhub-backend",
   "version": "1.0.0",
   "description": "Backend API for FoodHub IIT Mandi food ordering application",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "npx nodemon src/index.js"
+    "start": "node src/index.js",
+    "dev": "npx nodemon src/index.js"
   },
   "author": "Kartavya Sandhu <kartavya.sandhu@iitmandi.ac.in>",
   "license": "ISC",
