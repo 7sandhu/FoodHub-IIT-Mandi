@@ -467,20 +467,7 @@ function Home() {
                         {/* Left side - Content */}
                         <div>
                             <div className="mb-8">
-                                <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
-                                <p className="text-gray-600 mb-4">
-                                    FoodHub was created to solve a real problem faced by students at IIT Mandi. Located in the beautiful 
-                                    mountains of Himachal Pradesh, our campus often faced challenges with food delivery services due to 
-                                    the remote location and unique infrastructure.
-                                </p>
-                                <p className="text-gray-600 mb-4">
-                                    We bridge the gap between hungry students and delicious food by partnering with campus canteens 
-                                    and local restaurants, ensuring reliable delivery to hostels and academic blocks across the campus.
-                                </p>
-                            </div>
-
-                            <div className="mb-8">
-                                <h3 className="text-2xl font-bold text-gray-900 mb-4">Why Choose FoodHub?</h3>
+                                <h3 className="text-2xl font-bold text-gray-900 mb-4">Project Features</h3>
                                 <div className="space-y-3">
                                     <div className="flex items-center">
                                         <IconPatchCheck className="text-orange-500 w-5 h-5 mr-3" />
@@ -488,15 +475,19 @@ function Home() {
                                     </div>
                                     <div className="flex items-center">
                                         <IconPatchCheck className="text-orange-500 w-5 h-5 mr-3" />
-                                        <span className="text-gray-700">Supporting local canteens and businesses</span>
+                                        <span className="text-gray-700">Real-time cart management with Redux</span>
                                     </div>
                                     <div className="flex items-center">
                                         <IconPatchCheck className="text-orange-500 w-5 h-5 mr-3" />
-                                        <span className="text-gray-700">Student-friendly pricing and payment options</span>
+                                        <span className="text-gray-700">JWT-based authentication system</span>
                                     </div>
                                     <div className="flex items-center">
                                         <IconPatchCheck className="text-orange-500 w-5 h-5 mr-3" />
-                                        <span className="text-gray-700">Quick delivery to hostels and academic blocks</span>
+                                        <span className="text-gray-700">Responsive design with Tailwind CSS</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <IconPatchCheck className="text-orange-500 w-5 h-5 mr-3" />
+                                        <span className="text-gray-700">RESTful API with Express.js and MongoDB</span>
                                     </div>
                                 </div>
                             </div>

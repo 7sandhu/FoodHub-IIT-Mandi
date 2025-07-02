@@ -11,7 +11,6 @@ export const getAllProducts = createAsyncThunk('/products/getAll', async () => {
         const apiResponse = await axiosInstance.get('/products');
         return apiResponse;
     } catch(error) {
-        console.log("Error fetching products:", error);
         throw error;
     }
 });
@@ -21,7 +20,6 @@ export const getproductDetails = createAsyncThunk('/products/getDetails', async 
         const apiResponse = await axiosInstance.get(`/products/${id}`);
         return apiResponse;
     } catch(error) {
-        console.log("Error fetching product details:", error);
         throw error;
     }
 });
@@ -46,7 +44,6 @@ export const addProduct = createAsyncThunk('/products/addProduct', async (produc
         
         return apiResponse;
     } catch(error) {
-        console.log(error);
         throw error;
     }
 });

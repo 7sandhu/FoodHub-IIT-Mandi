@@ -11,7 +11,6 @@ const initialState = {
             try {
                 return JSON.parse(storedData);
             } catch (error) {
-                console.error('Error parsing stored user data:', error);
                 return {};
             }
         }
@@ -20,40 +19,33 @@ const initialState = {
 };
 
 export const createAccount = createAsyncThunk('/auth/createAccount', async (data) => {
-    console.log("incoming data to the thunk", data);
     try {
         const apiResponse = await axiosInstance.post('/users', data);
         toast.success(apiResponse?.data?.message || 'Account created successfully');
-        console.log("API Response:", apiResponse);
         return apiResponse;
     } catch(error) {
-        console.log("Error in createAccount:", error);
         toast.error('Registration failed. Please try again.');
         throw error;
     }
 });
 
 export const login = createAsyncThunk('/auth/login', async (data) => {
-    console.log("incoming data to the thunk", data);
     try {
         const apiResponse = await axiosInstance.post('/auth/login', data);
         toast.success(apiResponse?.data?.message || 'Logged in successfully');
         return apiResponse;
     } catch(error) {
-        console.log("Login error:", error);
         toast.error('Login failed. Please try again.');
         throw error;
     }
 });
 
 export const logout = createAsyncThunk('/auth/logout', async () => {
-    console.log("incoming data to the thunk");
     try {
         const apiResponse = await axiosInstance.post('/auth/logout');
         toast.success(apiResponse?.data?.message || 'Logged out successfully');
         return apiResponse;
     } catch(error) {
-        console.log(error);
         toast.error('Logout failed. Please try again.');
         throw error;
     }
@@ -77,7 +69,6 @@ const AuthSlice = createSlice({
         })
         .addCase(login.rejected, (state, action) => {
             // reducer which will execute when the login thunk is rejected
-            console.log("Login rejected:", action.error);
             state.isLoggedIn = false;
             state.role = '';
             state.data = {};

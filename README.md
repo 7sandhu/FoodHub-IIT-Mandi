@@ -28,7 +28,6 @@ A comprehensive food ordering web application designed specifically for the IIT 
 - **MongoDB** - NoSQL database
 - **Mongoose** - MongoDB object modeling
 - **JWT** - Authentication tokens
-- **Cloudinary** - Image storage and management
 - **Multer** - File upload middleware
 
 ## 🚀 Getting Started
@@ -36,7 +35,6 @@ A comprehensive food ordering web application designed specifically for the IIT 
 ### Prerequisites
 - Node.js (v14 or higher)
 - MongoDB
-- Cloudinary account (for image uploads)
 
 ### Installation
 
@@ -62,9 +60,6 @@ A comprehensive food ordering web application designed specifically for the IIT 
    PORT=8080
    MONGODB_URL=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
-   CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-   CLOUDINARY_API_KEY=your_cloudinary_key
-   CLOUDINARY_API_SECRET=your_cloudinary_secret
    ```
 
 4. Start both servers:

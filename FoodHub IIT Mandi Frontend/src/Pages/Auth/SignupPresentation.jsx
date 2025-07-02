@@ -162,7 +162,7 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                                 required 
                                 onChange={handleUserInput}
                                 minLength={5}
-                                placeholder="John"
+                                placeholder="First Name"
                                 className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 
@@ -175,7 +175,7 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                                 required 
                                 onChange={handleUserInput}
                                 minLength={5}
-                                placeholder="Doe"
+                                placeholder="Last Name"
                                 className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 
@@ -187,7 +187,7 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                                 name="email" 
                                 required 
                                 onChange={handleUserInput}
-                                placeholder="john@example.com"
+                                placeholder="your.email@example.com"
                                 className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 
@@ -200,7 +200,7 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                                 required 
                                 onChange={handleUserInput}
                                 maxLength={12}
-                                placeholder="Enter 10 digit mobile number"
+                                placeholder="10-digit mobile number"
                                 className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 
@@ -212,7 +212,7 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                                 name="password" 
                                 required 
                                 onChange={handleUserInput}
-                                placeholder="Enter your password"
+                                placeholder="Create a secure password"
                                 className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 

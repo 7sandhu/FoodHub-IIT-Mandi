@@ -12,7 +12,6 @@ export const placeOrder = createAsyncThunk('/order/placeOrder', async () => {
         toast.success('Order created successfully');
         return apiResponse;
     } catch(error) {
-        console.log(error);
         toast.error('Failed to create order');
         throw error;
     }
@@ -29,7 +28,6 @@ const OrderSlice = createSlice({
             state.ordersData = action?.payload?.data;
         })
         .addCase(placeOrder.rejected, (state, action) => {
-            console.log("Failed to place order:", action.error);
             state.ordersData = null;
         });
     }

@@ -8,7 +8,7 @@ Backend API for the FoodHub IIT Mandi food ordering application. Built with Node
 - **Product Management**: CRUD operations for food items
 - **Order Management**: Complete order processing system
 - **Cart Operations**: Add, remove, and manage cart items
-- **File Upload**: Image upload functionality with Cloudinary integration
+- **File Upload**: Image upload functionality with local storage
 - **Database**: MongoDB with Mongoose ODM
 
 ## Tech Stack
@@ -16,7 +16,7 @@ Backend API for the FoodHub IIT Mandi food ordering application. Built with Node
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB with Mongoose
 - **Authentication**: JWT (JSON Web Tokens)
-- **File Upload**: Multer with Cloudinary
+- **File Upload**: Multer for local file handling
 - **Validation**: Custom middleware for data validation
 
 ## API Endpoints
@@ -51,9 +51,6 @@ Backend API for the FoodHub IIT Mandi food ordering application. Built with Node
    PORT=8080
    MONGODB_URL=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
-   CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-   CLOUDINARY_API_KEY=your_cloudinary_key
-   CLOUDINARY_API_SECRET=your_cloudinary_secret
    ```
 
 3. Start the server:
