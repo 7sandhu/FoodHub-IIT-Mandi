@@ -1,0 +1,13 @@
+{
+  "name": "foodhub-iit-mandi",
+  "version": "1.0.0",
+  "description": "FoodHub IIT Mandi - Full-stack food ordering platform",
+  "main": "FoodHub IIT Mandi Backend/src/index.js",
+  "scripts": {
+    "start": "node \"FoodHub IIT Mandi Backend/src/index.js\"",
+    "dev": "cd \"FoodHub IIT Mandi Backend\" && npm run dev"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
