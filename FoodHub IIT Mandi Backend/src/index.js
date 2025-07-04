@@ -38,8 +38,11 @@ app.get('/ping', (req, res) => {
 });
 
 app.listen(ServerConfig.PORT, async () => {
-    await connectDB();
-    console.log(`Server started at port ${ServerConfig.PORT}...!!`);
-
-    
+    try {
+        await connectDB();
+        console.log(`Server started at port ${ServerConfig.PORT}...!!`);
+    } catch (error) {
+        console.error('Failed to start server:', error);
+        process.exit(1);
+    }
 });
