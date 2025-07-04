@@ -1,6 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getAllProducts } from '../Redux/Slices/ProductSlice';
 
 function Home() {
+  const dispatch = useDispatch();
+  const { productsData } = useSelector((state) => state.product);
+  const [loading, setLoading] = useState(true);
+
+  async function loadProducts() {
+    try {
+      setLoading(true);
+      const response = await dispatch(getAllProducts());
+      if (response?.payload?.data) {
+        // Products loaded successfully
+      }
+    } catch (error) {
+      console.error('Error loading products:', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    loadProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -24,16 +57,44 @@ function Home() {
           <h2 className="section-title text-center font-bold text-gray-800 mb-12 animate-fade-in-up">
             Our Menu
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="card-hover bg-white rounded-lg shadow-md p-6">
-                <div className="h-48 bg-gradient-to-br from-orange-100 to-amber-100 rounded-lg mb-4"></div>
-                <h3 className="text-xl font-semibold mb-2">Delicious Item {item}</h3>
-                <p className="text-gray-600 mb-4">Amazing food description here</p>
-                <button className="btn-secondary w-full">Add to Cart</button>
-              </div>
-            ))}
-          </div>
+          
+          {productsData && productsData.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {productsData.map((product) => (
+                <Link 
+                  key={product._id} 
+                  to={`/products/${product._id}`}
+                  className="card-hover bg-white rounded-lg shadow-md overflow-hidden"
+                >
+                  <div className="h-48 overflow-hidden">
+                    {product.productImage ? (
+                      <img 
+                        src={product.productImage} 
+                        alt={product.productName}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="h-full bg-gradient-to-br from-orange-100 to-amber-100 flex items-center justify-center">
+                        <span className="text-gray-500">No Image</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-semibold mb-2">{product.productName}</h3>
+                    <p className="text-gray-600 mb-4 line-clamp-2">{product.description}</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-2xl font-bold text-orange-500">₹{product.price}</span>
+                      <span className="text-sm text-gray-500">{product.category}</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-gray-600 text-lg">No products available at the moment.</p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -48,7 +109,7 @@ function Home() {
               <div key={index} className="hover-lift p-6">
                 <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full mx-auto mb-4 animate-float"></div>
                 <h3 className="text-xl font-semibold mb-2">{service}</h3>
-                <p className="text-gray-600">Service description here</p>
+                <p className="text-gray-600">Quality service you can trust</p>
               </div>
             ))}
           </div>
