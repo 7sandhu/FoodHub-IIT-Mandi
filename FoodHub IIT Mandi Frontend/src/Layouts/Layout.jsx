@@ -59,7 +59,7 @@ function Layout({ children }) {
     return (
         <div>
 
-            <nav className="flex items-center justify-around h-16 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 text-white font-mono border-none shadow-lg backdrop-blur-md sticky top-0 z-50 transition-all duration-300">
+            <nav className="flex items-center justify-around h-16 bg-gradient-to-r from-orange-600 via-orange-500 to-amber-600 text-white font-mono border-none shadow-lg backdrop-blur-md sticky top-0 z-50 transition-all duration-300">
 
                 <div className="flex items-center justify-center cursor-pointer hover-lift button-bounce"
                     onClick={() => navigate('/')}

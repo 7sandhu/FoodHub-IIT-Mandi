@@ -314,7 +314,7 @@ function Home() {
                 </div>
             </section>
 
-            {/* Services and About sections remain the same but with enhanced animations */}
+
             <section id="services-section" className="lg:pt-[50px] pb-10 lg:pb-20 bg-gradient-to-br from-gray-50 to-orange-50">
                 <div className="container">
                     <div className="flex flex-wrap -mx-4">
@@ -332,7 +332,7 @@ function Home() {
                             </div>
                         </div>
                     </div>
-                    {/* Rest of services section with animations */}
+
                 </div>
             </section>
         </div>
