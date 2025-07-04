@@ -59,61 +59,75 @@ function Layout({ children }) {
     return (
         <div>
 
-            <nav className="flex items-center justify-around h-16 bg-gradient-to-r from-orange-600 to-amber-600 text-white font-mono border-none shadow-lg">
+            <nav className="flex items-center justify-around h-16 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 text-white font-mono border-none shadow-lg backdrop-blur-md sticky top-0 z-50 transition-all duration-300">
 
-                <div className="flex items-center justify-center cursor-pointer"
+                <div className="flex items-center justify-center cursor-pointer hover-lift button-bounce"
                     onClick={() => navigate('/')}
                 >
-                    <p className="mr-3 font-bold text-lg">FoodHub IIT Mandi</p>
-                    <img src={FoodIcon} alt="FoodHub logo" className="w-10 h-10 filter brightness-0 invert" />
+                    <p className="mr-3 font-bold text-lg gradient-text text-shadow">FoodHub IIT Mandi</p>
+                    <img src={FoodIcon} alt="FoodHub logo" className="w-10 h-10 filter brightness-0 invert hover:rotate-12 transition-transform duration-300" />
                 </div>
 
                 <div className='hidden md:block'>
-                    <ul className='flex gap-4'>
+                    <ul className='flex gap-6'>
 
-                        <li className='hover:text-yellow-200 cursor-pointer transition-colors duration-300'
+                        <li className='hover:text-yellow-200 cursor-pointer transition-all duration-300 hover:scale-110 hover:-translate-y-1 font-medium relative group'
                             onClick={() => navigateToHomeSection('menu-section')}
                         >
-                            { ' ' }
-                            <p>Menu {' '}</p>
+                            <p className="relative z-10">Menu</p>
+                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
                         </li>
 
-                        <li className='hover:text-yellow-200 cursor-pointer transition-colors duration-300'
+                        <li className='hover:text-yellow-200 cursor-pointer transition-all duration-300 hover:scale-110 hover:-translate-y-1 font-medium relative group'
                             onClick={() => navigateToHomeSection('services-section')}
                         >
-                            { ' ' }
-                            <p>Services {' '}</p>
+                            <p className="relative z-10">Services</p>
+                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
                         </li>
 
-                        <li className='hover:text-yellow-200 cursor-pointer transition-colors duration-300'
+                        <li className='hover:text-yellow-200 cursor-pointer transition-all duration-300 hover:scale-110 hover:-translate-y-1 font-medium relative group'
                             onClick={() => navigateToHomeSection('about-section')}
                         >
-                            { ' ' }
-                            <p>About {' '}</p>
+                            <p className="relative z-10">About</p>
+                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
                         </li>
 
                     </ul>
                 </div>
 
                 <div>
-                    <ul className='flex gap-4'>
-                        <li className='hover:text-yellow-200 transition-colors duration-300'>
+                    <ul className='flex gap-4 items-center'>
+                        <li className='relative group'>
                             {isLoggedIn ? (
-                                <Link onClick={handleLogout}>Logout</Link>
+                                <button 
+                                    onClick={handleLogout}
+                                    className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg font-medium"
+                                >
+                                    Logout
+                                </button>
                             ) : (
-                                <Link to={'/auth/login'}>Login</Link>
+                                <Link 
+                                    to={'/auth/login'}
+                                    className="px-4 py-2 bg-white text-orange-600 hover:bg-orange-50 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg font-medium border border-orange-200"
+                                >
+                                    Login
+                                </Link>
                             )}
                         </li>
 
                         {isLoggedIn && (
-                            <Link to={'/cart'}>
-                                <li className='flex items-center hover:text-yellow-200 transition-colors duration-300'>
-                                    <img src={CartIcon} className='w-8 h-8 inline filter brightness-0 invert' />
-                                    {' '}
-                                    <p className='inline ml-1 bg-yellow-500 text-orange-800 px-2 py-1 rounded-full text-sm font-bold'>{cartsData?.items?.length}</p>
-                                </li>
-                            </Link>
-                            
+                            <li>
+                                <Link to={'/cart'} className="relative group">
+                                    <div className='flex items-center hover:text-yellow-200 transition-all duration-300 transform hover:scale-110 cursor-pointer bg-white bg-opacity-20 rounded-lg px-3 py-2 hover:bg-opacity-30'>
+                                        <img src={CartIcon} className='w-8 h-8 inline filter brightness-0 invert transition-transform duration-300 group-hover:rotate-12' />
+                                        {cartsData?.items?.length > 0 && (
+                                            <span className='ml-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-orange-800 px-2 py-1 rounded-full text-sm font-bold animate-pulse shadow-lg'>
+                                                {cartsData?.items?.length}
+                                            </span>
+                                        )}
+                                    </div>
+                                </Link>
+                            </li>
                         )}
                     </ul>
                 </div>
