@@ -2,14 +2,10 @@
 nixPkgs = ['nodejs']
 
 [phases.install]
-cmd = 'cd "FoodHub IIT Mandi Backend" && rm -f package-lock.json && npm install'
+cmd = 'npm install'
 
 [phases.build]
-cmd = 'echo "No build step required for backend"'
+cmd = 'echo "No build step required"'
 
 [start]
-cmd = 'cd "FoodHub IIT Mandi Backend" && npm start'
-
-[variables]
-NPM_CONFIG_FUND = 'false'
-NPM_CONFIG_AUDIT = 'false'
+cmd = 'npm start'
