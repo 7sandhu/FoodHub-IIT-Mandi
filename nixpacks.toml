@@ -2,7 +2,7 @@
 nixPkgs = ['nodejs']
 
 [phases.install]
-cmd = 'cd "FoodHub IIT Mandi Backend" && npm install --production'
+cmd = 'cd "FoodHub IIT Mandi Backend" && npm install'
 
 [phases.build]
 cmd = 'echo "No build step required for backend"'
