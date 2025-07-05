@@ -1,10 +1,12 @@
 import IconArrowRight from "../Components/Icons/ArrowRight";
-import PizzaImage from '../assets/Images/pizza2.png';
+import PizzaImage from '../assets/Images/restaurant-thumb.png';
 import ProductImage from '../assets/Images/product image.png';
 import IITMandiImage from '../assets/Images/IIT-Mandi-image.jpeg';
 import Layout from "../Layouts/Layout";
+import LoadingSpinner from "../Components/LoadingSpinner";
+import LazyImage from "../Components/LazyImage";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { getAllProducts } from "../Redux/Slices/ProductSlice";
 import { addProductToCart, getCartDetails } from "../Redux/Slices/CartSlice";
 import { Link } from "react-router-dom";
@@ -13,11 +15,11 @@ import toast from "react-hot-toast";
 function Home() {
     const dispatch = useDispatch();
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
-    const { productsData } = useSelector((state) => state.product);
+    const { productsData, loading } = useSelector((state) => state.product);
     const { isLoggedIn } = useSelector((state) => state.auth);
 
-    // Quick Add to Cart function
-    const handleQuickAdd = async (productId) => {
+    // Optimize with useCallback to prevent unnecessary re-renders
+    const handleQuickAdd = useCallback(async (productId) => {
         if (!isLoggedIn) {
             toast.error('Please login to add items to cart');
             return;
@@ -31,7 +33,7 @@ function Home() {
         } catch (error) {
             // Error handling for cart operations
         }
-    };
+    }, [isLoggedIn, dispatch]);
 
     // IIT Mandi Local Restaurants Data
     const restaurants = [
@@ -140,9 +142,14 @@ function Home() {
         dispatch(getAllProducts());
     }, [dispatch]);
 
-    // Ensure productsData is an array and handle undefined/null cases
-    const products = Array.isArray(productsData) ? productsData : [];
-    const inStockProducts = products.filter(item => item.inStock);
+    // Optimize with useMemo to prevent expensive calculations on every render
+    const products = useMemo(() => {
+        return Array.isArray(productsData) ? productsData : [];
+    }, [productsData]);
+    
+    const inStockProducts = useMemo(() => {
+        return products.filter(item => item.inStock);
+    }, [products]);
 
     return (
         <Layout>

@@ -10,6 +10,7 @@ async function connectDB() {
         console.log("Successfully connected to the mongo db server .....");
     } catch(error) {
         console.log("Not able to connect to the mongodb server");
+        throw error;
     }
 }
 

@@ -29,6 +29,7 @@ async function getProductById(productId) {
 
 async function getAllProducts() {
     try {
+        // Get all products without restrictions
         const products = await Product.find({});
         return products;
     } catch (error) {

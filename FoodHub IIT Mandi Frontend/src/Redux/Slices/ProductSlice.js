@@ -4,27 +4,29 @@ import toast from "react-hot-toast";
 
 const initialState = {
     productsData: [], // Array of products
+    loading: false,
+    error: null
 }
 
-export const getAllProducts = createAsyncThunk('/products/getAll', async () => {
+export const getAllProducts = createAsyncThunk('/products/getAll', async (_, { rejectWithValue }) => {
     try {
         const apiResponse = await axiosInstance.get('/products');
         return apiResponse;
     } catch(error) {
-        throw error;
+        return rejectWithValue(error.response?.data || error.message);
     }
 });
 
-export const getproductDetails = createAsyncThunk('/products/getDetails', async (id) => {
+export const getproductDetails = createAsyncThunk('/products/getDetails', async (id, { rejectWithValue }) => {
     try {
         const apiResponse = await axiosInstance.get(`/products/${id}`);
         return apiResponse;
     } catch(error) {
-        throw error;
+        return rejectWithValue(error.response?.data || error.message);
     }
 });
 
-export const addProduct = createAsyncThunk('/products/addProduct', async (productData) => {
+export const addProduct = createAsyncThunk('/products/addProduct', async (productData, { rejectWithValue }) => {
     try {
         const formData = new FormData();
         formData.append('productName', productData.productName);
@@ -44,20 +46,26 @@ export const addProduct = createAsyncThunk('/products/addProduct', async (produc
         
         return apiResponse;
     } catch(error) {
-        throw error;
+        return rejectWithValue(error.response?.data || error.message);
     }
 });
 
 const productSlice = createSlice({
     name: 'product',
     initialState,
-    reducers: {},
+    reducers: {
+        clearError: (state) => {
+            state.error = null;
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(getAllProducts.pending, (state) => {
-            // Optional: Add loading state
+            state.loading = true;
+            state.error = null;
         })
         .addCase(getAllProducts.fulfilled, (state, action) => {
+            state.loading = false;
             const products = action?.payload?.data?.data;
             if (Array.isArray(products)) {
                 state.productsData = products;
@@ -68,22 +76,27 @@ const productSlice = createSlice({
             }
         })
         .addCase(getAllProducts.rejected, (state, action) => {
+            state.loading = false;
             state.productsData = [];
+            state.error = action.payload;
             toast.error('Failed to load products');
         })
         .addCase(getproductDetails.fulfilled, (state, action) => {
             toast.success('Product details loaded');
         })
         .addCase(getproductDetails.rejected, (state, action) => {
+            state.error = action.payload;
             toast.error('Failed to load product details');
         })
         .addCase(addProduct.fulfilled, (state, action) => {
             toast.success('Product added successfully!');
         })
         .addCase(addProduct.rejected, (state, action) => {
+            state.error = action.payload;
             toast.error('Failed to add product');
         });
     }
 });
 
+export const { clearError } = productSlice.actions;
 export default productSlice.reducer;

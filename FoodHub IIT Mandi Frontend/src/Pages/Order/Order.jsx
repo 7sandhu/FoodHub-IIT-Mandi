@@ -48,9 +48,9 @@ function Order() {
                         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Thanks for Choosing Us {' '}</h1>
 
                         <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-                            Total Price - 
+                            Total Price: 
                             <span className="font-bold text-red-900">
-                                ₹ {cartsData?.items?.length === 0
+                                ₹{cartsData?.items?.length === 0
                           ? ''
                           : cartsData?.items?.reduce((acc, item) => acc + item?.quantity*item?.product?.price , 0) }
                             </span>

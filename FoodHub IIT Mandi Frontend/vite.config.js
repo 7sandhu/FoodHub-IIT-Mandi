@@ -10,6 +10,32 @@ export default defineConfig({
     host: true
   },
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+    // Performance optimizations
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Split vendor libraries into separate chunks
+          vendor: ['react', 'react-dom'],
+          redux: ['@reduxjs/toolkit', 'react-redux'],
+          router: ['react-router-dom'],
+          utils: ['axios', 'react-hot-toast']
+        }
+      }
+    },
+    // Enable gzip compression
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.log in production
+        drop_debugger: true
+      }
+    },
+    // Optimize chunk size
+    chunkSizeWarningLimit: 1000
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['react', 'react-dom', '@reduxjs/toolkit', 'react-redux', 'react-router-dom', 'axios']
   }
 })
