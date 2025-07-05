@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create(); // Create a new instance of axios
 
-axiosInstance.defaults.baseURL = import.meta.env.VITE_BACKEND_URL; // Set the base URL
+axiosInstance.defaults.baseURL = import.meta.env.VITE_BACKEND_URL || 'https://web-production-26189.up.railway.app'; // Set the base URL
 axiosInstance.defaults.withCredentials = true; // Allow cookies to be sent with requests
 
 // Performance optimizations
