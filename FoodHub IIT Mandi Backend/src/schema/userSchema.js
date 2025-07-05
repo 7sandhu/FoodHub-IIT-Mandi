@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, "First Name is required"],
-        minlength: [5, "First name must be atleast 5 character long"],
+        minlength: [3, "First name must be atleast 3 character long"],
         lowercase: true,
         trim: true, // if the user gives extra spaces then it will automatically remove it
         maxlength: [20, "First name should be less than or equal to 20 characters"]
@@ -12,10 +12,16 @@ const userSchema = new mongoose.Schema({
 
     lastName: {
         type: String,
-        minlength: [5, "First name must be atleast 5 character long"],
+        validate: {
+            validator: function(v) {
+                // Only validate length if lastName is provided and not empty
+                return !v || v.length >= 3;
+            },
+            message: 'Last name must be at least 3 characters long'
+        },
         lowercase: true,
         trim: true, // if the user gives extra spaces then it will automatically remove it
-        maxlength: [20, "First name should be less than or equal to 20 characters"]
+        maxlength: [20, "Last name should be less than or equal to 20 characters"]
     },
 
     mobileNumber: {

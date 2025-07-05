@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartDetails, removeProductFromCart } from "../../Redux/Slices/CartSlice";
+import { getCartDetails, removeProductFromCart, clearCart } from "../../Redux/Slices/CartSlice";
 import Layout from "../../Layouts/Layout";
 import { Link } from "react-router-dom";
 
@@ -16,12 +16,35 @@ function CartDetails() {
     }
 
     async function handleRemove(productId) {
-        // Remove product from cart
-        const response = await dispatch(removeProductFromCart(productId));
-        if(response?.payload?.data?.success) {
-            dispatch(getCartDetails()); // Fetch cart details and update state
+        try {
+            console.log('Removing product with ID:', productId);
+            // Remove product from cart
+            const response = await dispatch(removeProductFromCart(productId));
+            console.log('Remove response:', response);
+            if(response?.payload?.data?.success) {
+                // Fetch updated cart details
+                await dispatch(getCartDetails());
+                // Also fetch cart details again to update local state
+                fetchCartDetails();
+            }
+        } catch (error) {
+            console.error('Error removing product from cart:', error);
         }
     }
+    async function handleClearCart() {
+        try {
+            const response = await dispatch(clearCart());
+            if(response?.payload?.data?.success) {
+                // Fetch updated cart details
+                await dispatch(getCartDetails());
+                // Also fetch cart details again to update local state
+                fetchCartDetails();
+            }
+        } catch (error) {
+            console.error('Error clearing cart:', error);
+        }
+    }
+
     useEffect(() => {
         fetchCartDetails();
     }, [cartsData?.items?.length]);
@@ -37,6 +60,19 @@ function CartDetails() {
             </h2>
             <p className="text-gray-600 text-lg">Review your selected items from FoodHub IIT Mandi</p>
             <div className="w-24 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto mt-4 rounded-full"></div>
+            
+            {/* Empty Cart Button - Only show if cart has items */}
+            {cartDetails?.items?.length > 0 && (
+              <button
+                onClick={handleClearCart}
+                className="mt-6 px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center gap-2 mx-auto"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                Empty Cart
+              </button>
+            )}
           </div>
           {cartDetails?.items?.length > 0 ? (
             <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
@@ -58,7 +94,7 @@ function CartDetails() {
                         />
                         <div className="flex-1 w-full min-w-0 md:order-2 md:max-w-md">
                           <p className="text-base font-semibold text-gray-900 hover:text-orange-600 transition-colors duration-300 mb-2">
-                            <Link to={`/product/${item?._id}`} className="hover:underline">
+                            <Link to={`/product/${item?.product?._id}`} className="hover:underline">
                               {`${item?.product?.productName}, ${item?.product?.description}, Category: ${item?.product?.category}`}
                             </Link>
                           </p>

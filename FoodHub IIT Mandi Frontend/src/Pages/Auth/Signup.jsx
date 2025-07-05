@@ -30,18 +30,18 @@ function Signup() {
         e.preventDefault(); // prevent the form from reloading the page
 
         // Add validations for the form input
-        if(!signUpState.email || !signUpState.mobileNumber || !signUpState.password || !signUpState.firstName || !signUpState.lastName) {
+        if(!signUpState.email || !signUpState.mobileNumber || !signUpState.password || !signUpState.firstName) {
             toast.error("Missing values from the form")
             return;
         }
 
-        if(signUpState.firstName.length < 5 || signUpState.firstName.length > 20) {
-            toast.error("First name should be atleast 5 characters long and maximum 20 characters long")
+        if(signUpState.firstName.length < 3 || signUpState.firstName.length > 20) {
+            toast.error("First name should be atleast 3 characters long and maximum 20 characters long")
             return;
         }
 
-        if(signUpState.lastName.length < 5 || signUpState.lastName.length > 20) {
-            toast.error("Last name should be atleast 5 characters long and maximum 20 characters long")
+        if(signUpState.lastName && (signUpState.lastName.length < 3 || signUpState.lastName.length > 20)) {
+            toast.error("Last name should be atleast 3 characters long and maximum 20 characters long")
             return;
         }
 

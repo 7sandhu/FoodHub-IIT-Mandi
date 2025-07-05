@@ -21,7 +21,7 @@ async function registerUser(userDetails) {
         email: userDetails.email,
         password: userDetails.password,
         firstName: userDetails.firstName,
-        lastName: userDetails.lastName,
+        lastName: userDetails.lastName || '', // Handle case where lastName is not provided
         mobileNumber: userDetails.mobileNumber
     });
 

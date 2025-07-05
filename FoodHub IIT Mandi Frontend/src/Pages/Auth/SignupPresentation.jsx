@@ -161,21 +161,20 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                                 name="firstName" 
                                 required 
                                 onChange={handleUserInput}
-                                minLength={5}
+                                minLength={3}
                                 placeholder="First Name"
                                 className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 
                         <div className="relative mb-4">
-                            <label htmlFor="lastName" className="text-sm font-medium leading-7 text-gray-700">Last Name <span className="text-red-500">*</span></label>
+                            <label htmlFor="lastName" className="text-sm font-medium leading-7 text-gray-700">Last Name</label>
                             <input 
                                 type="text" 
                                 id="lastName" 
                                 name="lastName" 
-                                required 
                                 onChange={handleUserInput}
-                                minLength={5}
-                                placeholder="Last Name"
+                                minLength={3}
+                                placeholder="Last Name (Optional)"
                                 className="w-full px-3 py-2 mt-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded-lg outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200" />
                         </div>
 

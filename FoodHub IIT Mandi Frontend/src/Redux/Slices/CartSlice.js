@@ -28,6 +28,17 @@ export const removeProductFromCart = createAsyncThunk('/cart/removeProduct', asy
     }
 });
 
+export const clearCart = createAsyncThunk('/cart/clear', async () => {
+    try {
+        const apiResponse = await axiosInstance.delete('/carts/products');
+        toast.success('Cart cleared successfully');
+        return apiResponse;
+    } catch(error) {
+        toast.error('Failed to clear cart');
+        throw error;
+    }
+});
+
 export const getCartDetails = createAsyncThunk('/cart/getDetails', async () => {
     try {
         const apiResponse = await axiosInstance.get(`/carts`);
@@ -67,6 +78,13 @@ const cartSlice = createSlice({
         })
         .addCase(removeProductFromCart.rejected, (state, action) => {
             // Handle remove from cart failure
+        })
+        .addCase(clearCart.fulfilled, (state, action) => {
+            // Cart cleared successfully
+            state.cartsData = { items: [] };
+        })
+        .addCase(clearCart.rejected, (state, action) => {
+            // Handle clear cart failure
         });
     }
 });

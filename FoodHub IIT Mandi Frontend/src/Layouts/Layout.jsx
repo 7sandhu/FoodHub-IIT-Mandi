@@ -64,7 +64,7 @@ function Layout({ children }) {
                 <div className="flex items-center justify-center cursor-pointer hover-lift button-bounce"
                     onClick={() => navigate('/')}
                 >
-                    <p className="mr-3 font-bold text-lg gradient-text text-shadow">FoodHub IIT Mandi</p>
+                    <p className="mr-3 font-bold text-lg text-white hover:text-yellow-200 transition-colors duration-300 text-shadow">FoodHub IIT Mandi</p>
                     <img src={FoodIcon} alt="FoodHub logo" className="w-10 h-10 filter brightness-0 invert hover:rotate-12 transition-transform duration-300" />
                 </div>
 
@@ -82,13 +82,6 @@ function Layout({ children }) {
                             onClick={() => navigateToHomeSection('services-section')}
                         >
                             <p className="relative z-10">Services</p>
-                            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
-                        </li>
-
-                        <li className='hover:text-yellow-200 cursor-pointer transition-all duration-300 hover:scale-110 hover:-translate-y-1 font-medium relative group'
-                            onClick={() => navigateToHomeSection('about-section')}
-                        >
-                            <p className="relative z-10">About</p>
                             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-200 transition-all duration-300 group-hover:w-full"></span>
                         </li>
 

@@ -27,7 +27,7 @@ function Footer() {
                       </p>
                       
                       <p className="text-xs text-center text-white/70">
-                          Connecting campus with quality food, one order at a time
+                          Connecting campus with quality food
                       </p>
                     </div>
                   </div>

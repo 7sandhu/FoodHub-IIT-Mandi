@@ -10,6 +10,7 @@ function ProductDetails() {
     const dispatch = useDispatch();
     const [productDetails, setProductDetails] = useState({});
     const [isInCart, setIsInCart] = useState(false); // Check if product is in cart
+    const [quantity, setQuantity] = useState(1); // Quantity selector
     // 
 
     async function fetchProductDetails() {
@@ -27,15 +28,34 @@ function ProductDetails() {
 
     async function handleCart() {
         try {
-            const response = await dispatch(addProductToCart(productId));
-            if(response?.payload?.data?.success) {
-                setIsInCart(true);
-                dispatch(getCartDetails());
+            // Add the product to cart multiple times based on quantity
+            for (let i = 0; i < quantity; i++) {
+                await dispatch(addProductToCart(productId));
             }
+            setIsInCart(true);
+            dispatch(getCartDetails());
         } catch (error) {
             // Error handling for cart operations
         }
     }
+
+    // Quantity control functions
+    const increaseQuantity = () => {
+        setQuantity(prev => prev + 1);
+    };
+
+    const decreaseQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(prev => prev - 1);
+        }
+    };
+
+    const handleQuantityChange = (e) => {
+        const value = parseInt(e.target.value);
+        if (value >= 1) {
+            setQuantity(value);
+        }
+    };
 
     async function handleRemove() {
         try {
@@ -76,6 +96,46 @@ function ProductDetails() {
                   <p className="leading-relaxed mb-6 text-gray-600 text-lg">
                     {productDetails?.description}
                   </p>
+
+                  {/* Quantity Selector */}
+                  <div className="mb-6">
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Quantity
+                    </label>
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={decreaseQuantity}
+                        className="w-10 h-10 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg flex items-center justify-center transition-colors duration-200 hover:scale-105 active:scale-95"
+                        disabled={quantity <= 1}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                        </svg>
+                      </button>
+                      
+                      <input
+                        type="number"
+                        min="1"
+                        max="99"
+                        value={quantity}
+                        onChange={handleQuantityChange}
+                        className="w-16 h-10 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 font-semibold"
+                      />
+                      
+                      <button
+                        onClick={increaseQuantity}
+                        className="w-10 h-10 bg-orange-500 hover:bg-orange-600 text-white rounded-lg flex items-center justify-center transition-colors duration-200 hover:scale-105 active:scale-95"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                      </button>
+                      
+                      <span className="ml-2 text-sm text-gray-600">
+                        Total: ₹{(productDetails?.price * quantity).toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
     
                   <div className="flex items-center pt-5 border-t border-gray-200">
                     <span className="text-3xl font-bold bg-gradient-to-r from-orange-500 to-yellow-500 bg-clip-text text-transparent">
