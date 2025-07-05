@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ['nodejs']
+
+[phases.install]
+cmd = 'cd "FoodHub IIT Mandi Frontend" && npm install'
+
+[phases.build]
+cmd = 'cd "FoodHub IIT Mandi Frontend" && npm run build'
+
+[start]
+cmd = 'cd "FoodHub IIT Mandi Frontend" && npm run preview'
+
+[variables]
+VITE_BACKEND_URL = 'https://web-production-26189.up.railway.app'
