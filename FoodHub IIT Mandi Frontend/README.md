@@ -25,7 +25,17 @@ A modern food ordering web application designed for IIT Mandi campus community. 
    npm install
    ```
 
-2. Start the development server:
+2. Set up environment variables:
+   ```bash
+   # Copy the example environment file
+   cp .env.example .env
+   
+   # Edit .env and update VITE_BACKEND_URL if needed
+   # For development: http://localhost:8080
+   # For production: your deployed backend URL
+   ```
+
+3. Start the development server:
    ```bash
    npm run dev
    ```

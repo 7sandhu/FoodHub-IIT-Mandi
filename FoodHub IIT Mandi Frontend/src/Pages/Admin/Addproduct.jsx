@@ -48,7 +48,7 @@ function AddProduct() {
                 navigate('/'); // or wherever you want to redirect
             }
         } catch (error) {
-            console.error('Error adding product:', error);
+            // Error handling for product addition
         }
     }
 

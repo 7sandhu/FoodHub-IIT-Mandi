@@ -13,7 +13,7 @@ async function createNewOrder(orderDetails) {
             })
             throw new BadRequestError(errorMessageList);
         } 
-        console.log(error);
+
         throw new InternalServerError();
     }
 }
@@ -23,7 +23,7 @@ async function getOrdersByUserId(userId) {
         const orders = await Order.find({user: userId}).populate('items.product');
         return orders;
     } catch(error) {
-        console.log(error);
+
         throw new InternalServerError();
     }
 }
@@ -33,7 +33,7 @@ async function getOrderById(orderId) {
         const order = await Order.findById(orderId).populate('items.product');
         return order;
     } catch(error) {
-        console.log(error);
+
         throw new InternalServerError();
     }
 }
@@ -41,10 +41,10 @@ async function getOrderById(orderId) {
 async function updateOrderStatus(orderId, status) {
     try {
         const order = await Order.findByIdAndUpdate(orderId, {status: status}, {new:true});
-        console.log(order);
+
         return order;
     } catch(error) {
-        console.log(error);
+
         throw new InternalServerError();
     }
 }

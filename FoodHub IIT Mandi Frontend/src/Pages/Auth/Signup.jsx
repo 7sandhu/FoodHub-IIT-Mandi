@@ -4,7 +4,6 @@ import SignUpPresentation from "./SignupPresentation";
 import { useDispatch } from "react-redux";
 import { createAccount } from "../../Redux/Slices/AuthSlice";
 import { useNavigate } from "react-router-dom";
-// Container for the Signup page
 function Signup() {
 
     const dispatch = useDispatch();
@@ -45,7 +44,7 @@ function Signup() {
             return;
         }
 
-        // check email
+        // Email validation
         if(!signUpState.email.includes('@') || !signUpState.email.includes('.')) {
             toast.error("Invalid email address")
             return;

@@ -55,9 +55,23 @@ A comprehensive food ordering web application designed specifically for the IIT 
    npm install
    ```
 
-3. Set up environment variables in the backend folder (`.env`):
+3. Set up environment variables:
+   
+   **Backend Configuration:**
+   ```bash
+   cd "FoodHub IIT Mandi Backend"
+   cp .env.example .env
+   # Edit .env with your MongoDB connection string and JWT secret
    ```
-   PORT=8080
+   
+   **Frontend Configuration:**
+   ```bash
+   cd "../FoodHub IIT Mandi Frontend"
+   cp .env.example .env
+   # Edit .env if you need to change the backend URL
+   ```
+
+4. Start the development servers:
    MONGODB_URL=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
    ```

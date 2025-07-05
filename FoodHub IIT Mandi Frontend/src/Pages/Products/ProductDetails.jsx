@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getproductDetails } from "../../Redux/Slices/ProductSlice";
 import Layout from "../../Layouts/Layout";
 import { addProductToCart, getCartDetails, removeProductFromCart } from "../../Redux/Slices/CartSlice";
+import ProductImage from '../../assets/Images/product image.png';
 
 function ProductDetails() {
     const { productId } = useParams();
@@ -78,15 +79,15 @@ function ProductDetails() {
         <section className="overflow-hidden text-gray-600 body-font bg-gradient-to-br from-gray-50 to-orange-50 min-h-screen">
           <div className="container px-5 py-24 mx-auto">
             <div className="flex flex-wrap mx-auto lg:w-4/5 animate-fadeInUp">
-              <div className="w-full lg:w-1/2 animate-fadeInLeft">
+              <div className="w-full lg:w-1/2 animate-fadeInLeft flex items-center">
                 <img
                   alt="Product"
-                  className="object-cover object-center w-full h-64 lg:h-auto rounded-2xl shadow-xl hover:scale-105 transition-transform duration-500 card-hover"
-                  src={productDetails?.productImage}
+                  className="object-contain object-center w-full h-64 lg:h-80 rounded-2xl shadow-xl hover:scale-105 transition-transform duration-500 card-hover bg-gray-50"
+                  src={ProductImage}
                 />
               </div>
-              <div className="w-full mt-6 lg:w-1/2 lg:pl-10 lg:py-20 xl:py-28 lg:mt-0 animate-fadeInRight">
-                <div className="bg-white rounded-2xl p-8 shadow-xl hover-lift">
+              <div className="w-full mt-6 lg:w-1/2 lg:pl-10 lg:mt-0 animate-fadeInRight flex items-center">
+                <div className="bg-white rounded-2xl p-8 shadow-xl hover-lift w-full">
                   <h2 className="text-sm tracking-widest text-orange-500 font-semibold mb-2 uppercase">
                     {productDetails?.category}
                   </h2>

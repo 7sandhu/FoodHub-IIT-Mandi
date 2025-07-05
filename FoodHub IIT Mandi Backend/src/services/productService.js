@@ -14,7 +14,7 @@ async function createProduct(productDetails) {
             try {
                 await fs.unlink(process.cwd() + "/" + imagePath);
             } catch(unlinkError) {
-                // File cleanup failed, continue
+                // Continue operation
             }
         } catch(error) {
             throw new InternalServerError();

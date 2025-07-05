@@ -46,8 +46,21 @@ Backend API for the FoodHub IIT Mandi food ordering application. Built with Node
    npm install
    ```
 
-2. Set up environment variables in `.env`:
+2. Set up environment variables:
+   ```bash
+   # Copy the example environment file
+   cp .env.example .env
+   
+   # Edit .env with your actual values
+   # Update DB_URL with your MongoDB connection string
+   # Set a strong JWT_SECRET for production
    ```
+
+3. Configure your database connection in `.env`:
+   - For local development: `mongodb://localhost:27017/foodhub`
+   - For MongoDB Atlas: `mongodb+srv://username:password@cluster.mongodb.net/database`
+
+4. Start the development server:
    PORT=8080
    MONGODB_URL=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret

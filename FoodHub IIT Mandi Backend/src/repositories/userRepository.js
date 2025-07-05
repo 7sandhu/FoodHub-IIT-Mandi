@@ -7,7 +7,7 @@ async function findUser(parameters) {
         const response = await User.findOne({ ...parameters });
         return response;
     } catch(error) {
-        console.log(error);
+        throw error;
     }
     
 } 

@@ -12,7 +12,7 @@ async function getCartByUser(req, res) {
             data: cart
         })
    } catch(error) {
-        console.log(error);
+
         if(error instanceof AppError) {
             return res.status(error.statusCode).json({
                 success: false,
@@ -40,7 +40,7 @@ async function modifyProductTocart(req, res) {
              data: cart
          })
     } catch(error) {
-         console.log(error);
+
          if(error instanceof AppError) {
              return res.status(error.statusCode).json({
                  success: false,
@@ -68,7 +68,7 @@ async function modifyProductTocart(req, res) {
             data: cart
         })
    } catch(error) {
-        console.log(error);
+
         if(error instanceof AppError) {
             return res.status(error.statusCode).json({
                 success: false,

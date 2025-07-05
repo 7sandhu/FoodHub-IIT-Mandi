@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartDetails, removeProductFromCart, clearCart } from "../../Redux/Slices/CartSlice";
 import Layout from "../../Layouts/Layout";
 import { Link } from "react-router-dom";
+import ProductImage from '../../assets/Images/product image.png';
 
 function CartDetails() {
 
@@ -17,31 +18,24 @@ function CartDetails() {
 
     async function handleRemove(productId) {
         try {
-            console.log('Removing product with ID:', productId);
-            // Remove product from cart
             const response = await dispatch(removeProductFromCart(productId));
-            console.log('Remove response:', response);
             if(response?.payload?.data?.success) {
-                // Fetch updated cart details
                 await dispatch(getCartDetails());
-                // Also fetch cart details again to update local state
                 fetchCartDetails();
             }
         } catch (error) {
-            console.error('Error removing product from cart:', error);
+            // Error handling for cart operations
         }
     }
     async function handleClearCart() {
         try {
             const response = await dispatch(clearCart());
             if(response?.payload?.data?.success) {
-                // Fetch updated cart details
                 await dispatch(getCartDetails());
-                // Also fetch cart details again to update local state
                 fetchCartDetails();
             }
         } catch (error) {
-            console.error('Error clearing cart:', error);
+            // Error handling for cart operations
         }
     }
 
@@ -88,8 +82,8 @@ function CartDetails() {
                     >
                       <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                         <img
-                          className="hidden w-24 h-24 md:block rounded-xl object-cover shadow-md hover:scale-110 transition-transform duration-300"
-                          src={item?.product?.productImage}
+                          className="hidden w-24 h-24 md:block rounded-xl object-contain shadow-md hover:scale-110 transition-transform duration-300 bg-gray-50"
+                          src={ProductImage}
                           alt={item?.product?.productName}
                         />
                         <div className="flex-1 w-full min-w-0 md:order-2 md:max-w-md">

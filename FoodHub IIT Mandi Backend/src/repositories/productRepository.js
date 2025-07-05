@@ -14,7 +14,6 @@ async function createProduct(productDetails) {
             })
             throw new BadRequestError(errorMessageList);
         } 
-        console.log(error);
         throw new InternalServerError();
     }
 }
@@ -24,7 +23,6 @@ async function getProductById(productId) {
         const product = await Product.findById(productId);
         return product;
     } catch (error) {
-        console.log(error);
         throw new InternalServerError();
     }
 }
@@ -34,7 +32,6 @@ async function getAllProducts() {
         const products = await Product.find({});
         return products;
     } catch (error) {
-        console.log(error);
         throw new InternalServerError();
     }
 }
@@ -44,7 +41,6 @@ async function deleteProductById(productId) {
         const response = await Product.findByIdAndDelete(productId);
         return response;
     } catch (error) {
-        console.log(error);
         throw new InternalServerError();
     }
 }

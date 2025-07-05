@@ -26,7 +26,6 @@ async function modifyCart(userId, productId, shouldAdd = true) {
     // May be the product is already in the cart
     let foundProduct = false;
     cart.items.forEach(item => {
-        console.log(item)
         if(item.product._id == productId) {
             if(shouldAdd) {
                 if(product.quantity >= item.quantity + 1)

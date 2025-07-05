@@ -10,8 +10,6 @@ async function createOrder(userId, paymentMethod) {
     
     const cart = await getCartByUserId(userId);
     const user = await findUser({ _id: cart.user});
-    console.log(cart);
-    console.log(user);
     if(!cart) {
         throw new NotFoundError("Cart");
     }

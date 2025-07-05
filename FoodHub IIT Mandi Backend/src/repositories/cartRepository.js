@@ -16,7 +16,6 @@ async function createcart(userId) {
             })
             throw new BadRequestError(errorMessageList);
         } 
-        console.log(error);
         throw new InternalServerError();
     }
 }
@@ -28,7 +27,6 @@ async function getCartByUserId(userId) {
         }).populate('items.product');
         return cart;
     } catch (error) {
-        console.log(error);
         throw new InternalServerError();
     }
 }

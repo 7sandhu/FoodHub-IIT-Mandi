@@ -1,12 +1,7 @@
 import IconArrowRight from "../Components/Icons/ArrowRight";
 import PizzaImage from '../assets/Images/pizza2.png';
-import CookingImage from '../assets/Images/cooking1.png';
+import ProductImage from '../assets/Images/product image.png';
 import IITMandiImage from '../assets/Images/IIT-Mandi-image.jpeg';
-import KartavyaImage from '../assets/Images/Kartavya image.jpg';
-import IconPatchCheck from "../Components/Icons/IconPatchCheck";
-import OrderFood from '../assets/Images/orderFood.png';
-import Pickup from '../assets/Images/pickup.png';
-import Enjoy from '../assets/Images/enjoy.png';
 import Layout from "../Layouts/Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -34,7 +29,7 @@ function Home() {
                 dispatch(getCartDetails());
             }
         } catch (error) {
-            console.error('Error adding product to cart:', error);
+            // Error handling for cart operations
         }
     };
 
@@ -147,6 +142,7 @@ function Home() {
 
     // Ensure productsData is an array and handle undefined/null cases
     const products = Array.isArray(productsData) ? productsData : [];
+    const inStockProducts = products.filter(item => item.inStock);
 
     return (
         <Layout>
@@ -216,7 +212,7 @@ function Home() {
                                     <img
                                         src={restaurant.image}
                                         alt={restaurant.name}
-                                        className="w-full h-48 object-cover"
+                                        className="w-full h-48 object-contain bg-gray-100"
                                     />
                                     <div className="p-6 flex flex-col flex-grow">
                                         <div className="flex items-center justify-between mb-2">
@@ -294,45 +290,43 @@ function Home() {
                                             return null;
                                         }
                                         return (
-                                            item.inStock && (
-                                                <div className="card-hover bg-white rounded-lg shadow-lg overflow-hidden" key={item._id}>
-                                                    <img
-                                                        src={item.productImage || '/vite.svg'}
-                                                        alt={item.productName || 'Product'}
-                                                        className="w-full h-48 object-cover"
-                                                    />
-                                                    <div className="p-4">
-                                                        <div className="flex items-center justify-between mb-2">
-                                                            <h4 className="text-lg font-semibold text-gray-900">
-                                                                {item.productName || 'Unnamed Product'}
-                                                            </h4>
-                                                            <span className="text-xl font-bold text-orange-500">
-                                                                ₹{item.price || '0'}
-                                                            </span>
-                                                        </div>
-                                                        <p className="text-gray-600 text-sm mb-3">
-                                                            {item.description || 'No description'}
-                                                        </p>
-                                                        <div className="flex gap-2">
-                                                            <Link
-                                                                to={`/product/${item._id}`}
-                                                                className="btn-primary flex-1 text-center"
-                                                            >
-                                                                View Details
-                                                            </Link>
-                                                            <button 
-                                                                onClick={() => handleQuickAdd(item._id)}
-                                                                className="bg-green-500 hover:bg-green-600 active:bg-green-700 text-white px-4 py-2 rounded transition-all duration-200 flex items-center gap-1 transform hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-sm"
-                                                            >
-                                                                <svg className="w-4 h-4 transition-transform duration-200 group-active:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                                                </svg>
-                                                                Quick Add
-                                                            </button>
-                                                        </div>
+                                            <div className="card-hover bg-white rounded-lg shadow-lg overflow-hidden" key={item._id}>
+                                                <img
+                                                    src={ProductImage}
+                                                    alt={item.productName || 'Product'}
+                                                    className="w-full h-48 object-contain bg-gray-50"
+                                                />
+                                                <div className="p-4">
+                                                    <div className="flex items-center justify-between mb-2">
+                                                        <h4 className="text-lg font-semibold text-gray-900">
+                                                            {item.productName || 'Unnamed Product'}
+                                                        </h4>
+                                                        <span className="text-xl font-bold text-orange-500">
+                                                            ₹{item.price || '0'}
+                                                        </span>
+                                                    </div>
+                                                    <p className="text-gray-600 text-sm mb-3">
+                                                        {item.description || 'No description'}
+                                                    </p>
+                                                    <div className="flex gap-2">
+                                                        <Link
+                                                            to={`/product/${item._id}`}
+                                                            className="btn-primary flex-1 text-center"
+                                                        >
+                                                            View Details
+                                                        </Link>
+                                                        <button 
+                                                            onClick={() => handleQuickAdd(item._id)}
+                                                            className="bg-green-500 hover:bg-green-600 active:bg-green-700 text-white px-4 py-2 rounded transition-all duration-200 flex items-center gap-1 transform hover:scale-105 active:scale-95 hover:shadow-lg active:shadow-sm"
+                                                        >
+                                                            <svg className="w-4 h-4 transition-transform duration-200 group-active:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                                            </svg>
+                                                            Quick Add
+                                                        </button>
                                                     </div>
                                                 </div>
-                                            )
+                                            </div>
                                         )
                                     })
                                 )}

@@ -11,7 +11,7 @@ async function createNewOrder(req, res) {
             data: order
         })
     } catch(error) {
-        console.log(error);
+
         if(error instanceof AppError) {
             return res.status(error.statusCode).json({
                 success: false,
@@ -39,7 +39,7 @@ async function getAllOrdersByUser(req, res) {
             data: order
         })
     } catch(error) {
-        console.log(error);
+
         if(error instanceof AppError) {
             return res.status(error.statusCode).json({
                 success: false,
@@ -67,7 +67,7 @@ async function getOrder(req, res) {
             data: order
         })
     } catch(error) {
-        console.log(error);
+
         if(error instanceof AppError) {
             return res.status(error.statusCode).json({
                 success: false,
@@ -95,7 +95,7 @@ async function cancelOrder(req, res) {
             data: order
         })
     } catch(error) {
-        console.log(error);
+
         if(error instanceof AppError) {
             return res.status(error.statusCode).json({
                 success: false,
@@ -123,7 +123,7 @@ async function changeOrderStatus(req, res) {
             data: order
         })
     } catch(error) {
-        console.log(error);
+
         if(error instanceof AppError) {
             return res.status(error.statusCode).json({
                 success: false,

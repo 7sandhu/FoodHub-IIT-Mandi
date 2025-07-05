@@ -3,9 +3,7 @@ const { JWT_SECRET, COOKIE_SECURE, FRONTEND_URL } = require('../config/serverCon
 const UnAuthorisedError = require('../utils/unauthorisedError');
 
 async function isLoggedIn(req, res, next) {
-    console.log("Inside isLoggedIn", req.cookies);
     const token = req.cookies["authToken"];
-    console.log(token);
     if(!token) {
         return res.status(401).json({
             success: false,
@@ -17,7 +15,6 @@ async function isLoggedIn(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, JWT_SECRET);
-        console.log(decoded, decoded.exp, Date.now() / 1000);
 
         if(!decoded) {
             throw new UnAuthorisedError();
@@ -32,7 +29,6 @@ async function isLoggedIn(req, res, next) {
 
         next();
     } catch (error) {
-        console.log(error.name);
         if(error.name === "TokenExpiredError") {
             res.cookie("authToken", "", {
                 httpOnly: true,
@@ -63,9 +59,7 @@ async function isLoggedIn(req, res, next) {
  */
 function isAdmin(req, res, next) {
     const loggedInUser = req.user;
-    console.log(loggedInUser);
     if(loggedInUser.role === "ADMIN") {
-        console.log("User is an admin");
         next();
     } else {
         return res.status(401).json({

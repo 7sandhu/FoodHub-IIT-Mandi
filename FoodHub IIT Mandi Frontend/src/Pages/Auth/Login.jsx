@@ -29,7 +29,7 @@ function Login() {
             return;
         }
 
-        // check email
+        // Email validation
         if(!loginData.email.includes('@') || !loginData.email.includes('.')) {
             toast.error("Invalid email address")
             return;
@@ -45,7 +45,6 @@ function Login() {
                 toast.error("Login failed. Please check your credentials.");
             }
         } catch (error) {
-            console.error("Login error:", error);
             toast.error("Login failed. Please try again.");
         }
     }
