@@ -1,6 +1,0 @@
-# Ignore frontend files for Railway backend deployment
-FoodHub IIT Mandi Frontend/
-.git/
-.gitignore
-*.md
-.vscode/

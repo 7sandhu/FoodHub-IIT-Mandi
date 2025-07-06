@@ -9,6 +9,7 @@ const cartRouter = require('./routes/cartRoute');
 const authRouter = require('./routes/authRoute');
 const productRouter = require('./routes/productRoute');
 const orderRouter = require('./routes/orderRoutes');
+// const User = require('./schema/userSchema');
 
 const app = express();
 
@@ -30,15 +31,15 @@ app.use('/auth', authRouter);
 app.use('/products', productRouter);
 app.use('/orders', orderRouter);
 app.get('/ping', (req, res) => {
+    // controller
+    console.log(req.body);
+    console.log(req.cookies);
     return res.json({message: "pong"});
 });
 
 app.listen(ServerConfig.PORT, async () => {
-    try {
-        await connectDB();
-        console.log(`Server started at port ${ServerConfig.PORT}...!!`);
-    } catch (error) {
-        console.error('Failed to start server:', error);
-        process.exit(1);
-    }
+    await connectDB();
+    console.log(`Server started at port ${ServerConfig.PORT}...!!`);
+
+    
 });
