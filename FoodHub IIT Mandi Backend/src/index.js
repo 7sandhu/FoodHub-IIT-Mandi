@@ -14,7 +14,7 @@ const orderRouter = require('./routes/orderRoutes');
 const app = express();
 
 app.use(cors({
-    origin: ServerConfig.FRONTEND_URL, // allow to server to accept request from different origin
+    origin: 'https://7sandhu.github.io', // allow to server to accept request from different origin
     credentials: true, // allow session cookie from browser to pass through
 }));
 
