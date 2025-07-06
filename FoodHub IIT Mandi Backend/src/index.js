@@ -37,9 +37,26 @@ app.get('/ping', (req, res) => {
     return res.json({message: "pong"});
 });
 
-app.listen(ServerConfig.PORT, async () => {
+const PORT = process.env.PORT || ServerConfig.PORT || 8080;
+
+app.get('/', (req, res) => {
+    res.json({
+        status: 'Backend is running!',
+        routes: [
+            '/ping',
+            '/products',
+            '/products/:id',
+            '/users',
+            '/auth',
+            '/carts',
+            '/orders'
+        ]
+    });
+});
+
+app.listen(PORT, async () => {
     await connectDB();
-    console.log(`Server started at port ${ServerConfig.PORT}...!!`);
+    console.log(`Server started at port ${PORT}...!!`);
 
     
 });
