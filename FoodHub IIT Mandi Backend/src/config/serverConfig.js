@@ -17,5 +17,5 @@ module.exports = {
     JWT_SECRET: process.env.JWT_SECRET,
     JWT_EXPIRY: process.env.JWT_EXPIRY || '7d',
     FRONTEND_URL: process.env.FRONTEND_URL || 'https://7sandhu.github.io',
-    COOKIE_SECURE: process.env.COOKIE_SECURE || 'false',
+    COOKIE_SECURE: true, // Always true for production HTTPS
 }
